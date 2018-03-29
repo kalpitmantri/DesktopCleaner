@@ -1,11 +1,13 @@
 import os
 
 arr = []
+filename = "clean.py"
 
 for file in os.listdir(os.getcwd()):
 	if(os.path.isfile(file)):
-		name,ext = os.path.splitext(file)
-		arr.append(ext)
+		if(file !=  filename):
+			name,ext = os.path.splitext(file)
+			arr.append(ext)
 
 # print(arr)
 
@@ -14,7 +16,13 @@ for	ext in arr:
 	if ext not in res:
 		res.append(ext)
 
-os.mkdir("RestoredFiles")
+flag = 0
+for file in os.listdir(os.getcwd()):
+	if(file == "RestoredFiles"):
+		flag = 1
+		
+if(flag != 1):
+	os.mkdir("RestoredFiles")
 
 currentDir = os.getcwd()
 
@@ -28,12 +36,14 @@ for ext in res:
 
 os.chdir(currentDir)
 
-# print(os.getcwd())
+#print(os.getcwd())
 
 for file in os.listdir(os.getcwd()):
  	if(os.path.isfile(file)):
- 		name,ext = os.path.splitext(file)
- 		newName = ext.replace(".","");
- 		source = currentDir + "/" + file
- 		dest = currentDir + "/RestoredFiles/" + newName + "/" + file
- 		os.rename(source,dest)
+ 		if(file != filename):
+	 		name,ext = os.path.splitext(file)
+	 		newName = ext.replace(".","");
+	 		source = currentDir + "/" + file
+	 		dest = currentDir + "/RestoredFiles/" + newName + "/" + file
+	 		os.rename(source,dest)
+	
