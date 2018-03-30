@@ -32,7 +32,9 @@ os.chdir(resDir)
 
 for ext in res:
 	name = ext.replace(".","")
-	os.mkdir(name)
+	d = "./" + name
+	if(os.path.isdir(d) != True):
+		os.mkdir(name)
 
 os.chdir(currentDir)
 
